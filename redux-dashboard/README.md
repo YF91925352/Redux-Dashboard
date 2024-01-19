@@ -1,6 +1,6 @@
 # Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+1.利用 redux 对用户信息的 token 管理，从而识别用户身份信息保证登陆的正常运行 2.退出登陆删除 token 信息并返回登陆界面提高用户体验的交互性 3.处理 token 失效问题。当用户长时间未在网站中做任何操作，到达规定时间后 token 即失效
 
 ## Available Scripts
 
