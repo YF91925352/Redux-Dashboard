@@ -9,7 +9,7 @@ import "./index.scss";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchUserInfo } from "@/store/modules/user";
+import { clearUserInfo, fetchUserInfo } from "@/store/modules/user";
 
 const { Header, Sider } = Layout;
 
@@ -48,6 +48,11 @@ export const HomeLayout = () => {
   }, [dispatch]);
   //获取用户姓名
   const name = useSelector((state) => state.user.userInfo.name);
+  //退出登陆
+  const onConfirm = () => {
+    dispatch(clearUserInfo());
+    navigate("/login");
+  };
   return (
     <Layout>
       <Header className="header">
@@ -59,6 +64,7 @@ export const HomeLayout = () => {
               title="Are you sure you want to log out?"
               okText="Logout"
               cancelText="Cancel"
+              onConfirm={onConfirm}
             >
               <LogoutOutlined /> Logout
             </Popconfirm>
