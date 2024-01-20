@@ -28,6 +28,6 @@ export const BarChart = ({ title }) => {
     };
     //使用参数进行图标渲染
     option && myChart.setOption(option);
-  }, []);
+  }, [title]);
   return <div ref={chartRef} style={{ width: "500px", height: "400px" }}></div>;
 };
