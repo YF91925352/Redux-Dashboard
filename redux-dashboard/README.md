@@ -1,6 +1,6 @@
 # Getting Started with Create React App
 
-1.利用 redux 对用户信息的 token 管理，从而识别用户身份信息保证登陆的正常运行 2.退出登陆删除 token 信息并返回登陆界面提高用户体验的交互性 3.处理 token 失效问题。当用户长时间未在网站中做任何操作，到达规定时间后 token 即失效 4.Homepage 插入三方 apache echarts 插件，按照业务需求可以修改配置进行定制处理
+1.利用 redux 对用户信息的 token 管理，从而识别用户身份信息保证登陆的正常运行 2.退出登陆删除 token 信息并返回登陆界面提高用户体验的交互性 3.处理 token 失效问题。当用户长时间未在网站中做任何操作，到达规定时间后 token 即失效 4.Homepage 插入三方 apache echarts 插件，按照业务需求可以修改配置进行定制处理 5.react quill 富文本编辑器发布新内容
 
 ## Available Scripts
 
