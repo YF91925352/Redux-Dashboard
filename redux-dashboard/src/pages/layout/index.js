@@ -20,7 +20,7 @@ const items = [
     icon: <HomeOutlined />,
   },
   {
-    label: "Article Management",
+    label: "Management",
     key: "/article",
     icon: <DiffOutlined />,
   },

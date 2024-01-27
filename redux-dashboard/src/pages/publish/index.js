@@ -8,6 +8,7 @@ import {
   Upload,
   Space,
   Select,
+  message,
 } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
@@ -30,16 +31,32 @@ export const Publish = () => {
   }, []);
   //提交表单
   const onFinish = (formValue) => {
+    //校验imageType是否和imageList的数量一致
+    if (imageType !== imageList.length)
+      return message.warning(`You should submit ${imageType} photos`);
     const { title, channel_id, content } = formValue;
     //按照接口文档格式处理收集到的表单数据
     const reqData = {
       title: title,
       content: content,
-      cover: { type: 0, images: [] },
+      cover: {
+        type: imageType,
+        images: imageList.map((item) => item.response.data.url),
+      },
       channel_id: channel_id,
     };
     //调用接口提交数据
     createArticleAPI(reqData);
+  };
+  //上传图片
+  const [imageList, setImageList] = useState([]);
+  const onUploadChange = (image) => {
+    setImageList(image.fileList);
+  };
+  //切换图片封面类型
+  const [imageType, setImageType] = useState(0);
+  const onTypeChange = (type) => {
+    setImageType(type.target.value);
   };
   return (
     <div className="publish">
@@ -56,7 +73,7 @@ export const Publish = () => {
         <Form
           labelCol={{ span: 4 }}
           wrapperCol={{ span: 16 }}
-          initialValues={{ type: 1 }}
+          initialValues={{ type: 0 }}
           onFinish={onFinish}
         >
           <Form.Item
@@ -90,6 +107,30 @@ export const Publish = () => {
               ))}
             </Select>
           </Form.Item>
+          <Form.Item label="Cover">
+            <Form.Item name="type">
+              <Radio.Group onChange={onTypeChange}>
+                <Radio value={1}>Single Image</Radio>
+                <Radio value={3}>Three Images</Radio>
+                <Radio value={0}>No Image</Radio>
+              </Radio.Group>
+            </Form.Item>
+            {imageType > 0 && (
+              <Upload
+                name="image"
+                listType="picture-card"
+                showUploadList
+                action={"http://geek.itheima.net/v1_0/upload"}
+                onChange={onUploadChange}
+                maxCount={imageType}
+              >
+                <div style={{ marginTop: 8 }}>
+                  <PlusOutlined />
+                </div>
+              </Upload>
+            )}
+          </Form.Item>
+
           <Form.Item
             label="Content"
             name="content"
