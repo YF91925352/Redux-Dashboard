@@ -22,15 +22,40 @@ export const Article = () => {
   //获取文章列表
   const [list, setList] = useState([]);
   const [count, setCount] = useState(0);
+  //筛选功能
+  //1.准备参数
+  const [reqData, setReqData] = useState({
+    status: "",
+    channel_id: "",
+    begin_pubdate: "",
+    end_pubdate: "",
+    page: 1,
+    per_page: 5,
+  });
   useEffect(() => {
     async function getList() {
-      const res = await getArticleListAPI();
+      const res = await getArticleListAPI(reqData);
       setList(res.data.results);
       setCount(res.data.total_count);
     }
     getList();
-  }, []);
+  }, [reqData]);
 
+  //2.获取筛选数据
+  const onFinish = (formValue) => {
+    setReqData({
+      ...reqData,
+      status: formValue.status,
+      channel_id: formValue.channel_id,
+      begin_pubdate: formValue.date[0].format("YYYY-MM-DD"),
+      end_pubdate: formValue.date[1].format("YYYY-MM-DD"),
+    });
+  };
+  //定义状态枚举
+  const status = {
+    1: <Tag color="warning">Awaiting Approval</Tag>,
+    2: <Tag color="success">Approved</Tag>,
+  };
   const columns = [
     {
       title: "Cover",
@@ -50,7 +75,8 @@ export const Article = () => {
     {
       title: "Status",
       dataIndex: "status",
-      render: (data) => <Tag color="green">Approved</Tag>,
+      //data-后端返回status的数据
+      render: (data) => status[data],
     },
     {
       title: "Publish Time",
@@ -99,11 +125,11 @@ export const Article = () => {
         }
         style={{ marginBottom: 20 }}
       >
-        <Form initialValues={{ status: "" }}>
+        <Form initialValues={{ status: "" }} onFinish={onFinish}>
           <Form.Item label="Status" name="status">
             <Radio.Group>
               <Radio value={""}>All</Radio>
-              <Radio value={0}>Draft</Radio>
+              <Radio value={0}>Awaiting Approval</Radio>
               <Radio value={2}>Approved</Radio>
             </Radio.Group>
           </Form.Item>
