@@ -11,10 +11,26 @@ import {
 import { Table, Tag, Space } from "antd";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import img404 from "@/assets/error.png";
+import { useChannel } from "@/hooks/useChannel";
+import { useEffect, useState } from "react";
+import { getArticleListAPI } from "@/apis/article";
 const { Option } = Select;
 const { RangePicker } = DatePicker;
 
 export const Article = () => {
+  const { channelList } = useChannel();
+  //获取文章列表
+  const [list, setList] = useState([]);
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    async function getList() {
+      const res = await getArticleListAPI();
+      setList(res.data.results);
+      setCount(res.data.total_count);
+    }
+    getList();
+  }, []);
+
   const columns = [
     {
       title: "Cover",
@@ -70,22 +86,6 @@ export const Article = () => {
     },
   ];
 
-  // Prepare table body data
-  const data = [
-    {
-      id: "8218",
-      comment_count: 0,
-      cover: {
-        images: [],
-      },
-      like_count: 0,
-      pubdate: "2019-03-11 09:00:00",
-      read_count: 2,
-      status: 2,
-      title: "Solution for WKWebView Offline Loading of H5 Resources",
-    },
-  ];
-
   return (
     <div>
       <Card
@@ -111,11 +111,14 @@ export const Article = () => {
           <Form.Item label="Channel" name="channel_id">
             <Select
               placeholder="Select article channel"
-              defaultValue="lucy"
+              defaultValue="html"
               style={{ width: 120 }}
             >
-              <Option value="jack">Jack</Option>
-              <Option value="lucy">Lucy</Option>
+              {channelList.map((item) => (
+                <Option value={item.id} key={item.id}>
+                  {item.name}
+                </Option>
+              ))}
             </Select>
           </Form.Item>
 
@@ -131,8 +134,8 @@ export const Article = () => {
           </Form.Item>
         </Form>
       </Card>
-      <Card title={"Based on the filtering,count results were found"}>
-        <Table rowKey="id" columns={columns} dataSource={data} />
+      <Card title={`Based on the filtering,${count} results were found`}>
+        <Table rowKey="id" columns={columns} dataSource={list} />
       </Card>
     </div>
   );

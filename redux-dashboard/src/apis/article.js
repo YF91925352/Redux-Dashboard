@@ -8,3 +8,7 @@ export const getChannelAPI = () => {
 export const createArticleAPI = (data) => {
   request({ url: "/mp/articles?draft=false", method: "POST", data });
 };
+//获取文章列表
+export const getArticleListAPI = (params) => {
+  return request({ url: "/mp/articles", method: "GET", params });
+};
