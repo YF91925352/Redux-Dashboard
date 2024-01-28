@@ -56,6 +56,10 @@ export const Article = () => {
     1: <Tag color="warning">Awaiting Approval</Tag>,
     2: <Tag color="success">Approved</Tag>,
   };
+  //分页
+  const onPageChange = (page) => {
+    setReqData({ ...reqData, page: page });
+  };
   const columns = [
     {
       title: "Cover",
@@ -161,7 +165,16 @@ export const Article = () => {
         </Form>
       </Card>
       <Card title={`Based on the filtering,${count} results were found`}>
-        <Table rowKey="id" columns={columns} dataSource={list} />
+        <Table
+          rowKey="id"
+          columns={columns}
+          dataSource={list}
+          pagination={{
+            total: count,
+            pageSize: reqData.per_page,
+            onChange: onPageChange,
+          }}
+        />
       </Card>
     </div>
   );
