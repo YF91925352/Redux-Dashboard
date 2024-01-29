@@ -18,6 +18,7 @@ import "react-quill/dist/quill.snow.css";
 import { useEffect, useState } from "react";
 import { createArticleAPI, getArticleById } from "@/apis/article";
 import { useChannel } from "@/hooks/useChannel";
+
 const { Option } = Select;
 
 export const Publish = () => {
@@ -57,11 +58,22 @@ export const Publish = () => {
   const articleID = searchParams.get("id");
   const [form] = Form.useForm();
   useEffect(() => {
-    async function getArticleDetail() {
-      const res = await getArticleById(articleID);
-      form.setFieldsValue(res.data);
+    // Check if articleID is not null before making the API request
+    if (articleID) {
+      async function getArticleDetail() {
+        const res = await getArticleById(articleID);
+        const data = res.data;
+        const { cover } = data;
+        form.setFieldsValue({ ...data, type: cover.type });
+        setImageType(cover.type);
+        setImageList(
+          cover.images.map((url) => {
+            return { url: url };
+          })
+        );
+      }
+      getArticleDetail();
     }
-    getArticleDetail();
   }, [articleID, form]);
   return (
     <div className="publish">
@@ -129,6 +141,7 @@ export const Publish = () => {
                 action={"http://geek.itheima.net/v1_0/upload"}
                 onChange={onUploadChange}
                 maxCount={imageType}
+                fileList={imageList}
               >
                 <div style={{ marginTop: 8 }}>
                   <PlusOutlined />

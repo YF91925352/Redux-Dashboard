@@ -160,11 +160,7 @@ export const Article = () => {
           </Form.Item>
 
           <Form.Item label="Channel" name="channel_id">
-            <Select
-              placeholder="Select article channel"
-              defaultValue="html"
-              style={{ width: 120 }}
-            >
+            <Select placeholder="Select article channel" style={{ width: 120 }}>
               {channelList.map((item) => (
                 <Option value={item.id} key={item.id}>
                   {item.name}
