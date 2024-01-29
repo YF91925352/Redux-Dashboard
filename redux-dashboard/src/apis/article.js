@@ -12,3 +12,7 @@ export const createArticleAPI = (data) => {
 export const getArticleListAPI = (params) => {
   return request({ url: "/mp/articles", method: "GET", params });
 };
+//删除文章
+export const delArticleAPI = (id) => {
+  return request({ url: `/mp/articles/${id}`, method: "DELETE" });
+};

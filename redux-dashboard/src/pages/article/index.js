@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   Card,
   Breadcrumb,
@@ -7,13 +7,14 @@ import {
   Radio,
   DatePicker,
   Select,
+  Popconfirm,
 } from "antd";
 import { Table, Tag, Space } from "antd";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import img404 from "@/assets/error.png";
 import { useChannel } from "@/hooks/useChannel";
 import { useEffect, useState } from "react";
-import { getArticleListAPI } from "@/apis/article";
+import { delArticleAPI, getArticleListAPI } from "@/apis/article";
 const { Option } = Select;
 const { RangePicker } = DatePicker;
 
@@ -60,6 +61,14 @@ export const Article = () => {
   const onPageChange = (page) => {
     setReqData({ ...reqData, page: page });
   };
+  //删除单条记录
+  const onConfirm = async (data) => {
+    //保证文章删除后再重新获取
+    await delArticleAPI(data.id);
+    setReqData({ ...reqData });
+  };
+  //跳转到具体页
+  const navigate = useNavigate();
   const columns = [
     {
       title: "Cover",
@@ -103,13 +112,25 @@ export const Article = () => {
       render: (data) => {
         return (
           <Space size="middle">
-            <Button type="primary" shape="circle" icon={<EditOutlined />} />
             <Button
               type="primary"
-              danger
               shape="circle"
-              icon={<DeleteOutlined />}
+              icon={<EditOutlined />}
+              onClick={() => navigate(`/publish?id=${data.id}`)}
             />
+            <Popconfirm
+              title="Are you sure to delete this article"
+              okText="Confirm"
+              cancelText="Cancel"
+              onConfirm={() => onConfirm(data)}
+            >
+              <Button
+                type="primary"
+                danger
+                shape="circle"
+                icon={<DeleteOutlined />}
+              />
+            </Popconfirm>
           </Space>
         );
       },
