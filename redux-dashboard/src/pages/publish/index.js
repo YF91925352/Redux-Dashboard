@@ -59,21 +59,20 @@ export const Publish = () => {
   const [form] = Form.useForm();
   useEffect(() => {
     // Check if articleID is not null before making the API request
-    if (articleID) {
-      async function getArticleDetail() {
-        const res = await getArticleById(articleID);
-        const data = res.data;
-        const { cover } = data;
-        form.setFieldsValue({ ...data, type: cover.type });
-        setImageType(cover.type);
-        setImageList(
-          cover.images.map((url) => {
-            return { url: url };
-          })
-        );
-      }
-      getArticleDetail();
+
+    async function getArticleDetail() {
+      const res = await getArticleById(articleID);
+      const data = res.data;
+      const { cover } = data;
+      form.setFieldsValue({ ...data, type: cover.type });
+      setImageType(cover.type);
+      setImageList(
+        cover.images.map((url) => {
+          return { url: url };
+        })
+      );
     }
+    if (articleID) getArticleDetail();
   }, [articleID, form]);
   return (
     <div className="publish">
@@ -82,7 +81,7 @@ export const Publish = () => {
           <Breadcrumb
             items={[
               { title: <Link to={"/"}>Home Page</Link> },
-              { title: "Publish Article" },
+              { title: `${articleID ? "Edit Article" : "Publish Article"}` },
             ]}
           />
         }
