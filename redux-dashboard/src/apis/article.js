@@ -16,3 +16,7 @@ export const getArticleListAPI = (params) => {
 export const delArticleAPI = (id) => {
   return request({ url: `/mp/articles/${id}`, method: "DELETE" });
 };
+//获取文章详情
+export const getArticleById = (id) => {
+  return request({ url: `/mp/articles/${id}`, method: "GET" });
+};
