@@ -20,3 +20,7 @@ export const delArticleAPI = (id) => {
 export const getArticleById = (id) => {
   return request({ url: `/mp/articles/${id}`, method: "GET" });
 };
+//更新文章
+export const editArticleAPI = (data) => {
+  request({ url: `/mp/articles/${data.id}?draft=false`, method: "PUT", data });
+};

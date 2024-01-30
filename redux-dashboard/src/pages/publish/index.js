@@ -16,7 +16,11 @@ import "./index.scss";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { useEffect, useState } from "react";
-import { createArticleAPI, getArticleById } from "@/apis/article";
+import {
+  createArticleAPI,
+  editArticleAPI,
+  getArticleById,
+} from "@/apis/article";
 import { useChannel } from "@/hooks/useChannel";
 
 const { Option } = Select;
@@ -24,26 +28,39 @@ const { Option } = Select;
 export const Publish = () => {
   const { channelList } = useChannel();
   //提交表单
+
   const onFinish = (formValue) => {
     //校验imageType是否和imageList的数量一致
     if (imageType !== imageList.length)
       return message.warning(`You should submit ${imageType} photos`);
     const { title, channel_id, content } = formValue;
+
     //按照接口文档格式处理收集到的表单数据
     const reqData = {
       title: title,
       content: content,
       cover: {
         type: imageType,
-        images: imageList.map((item) => item.response.data.url),
+        images: imageList.map((item) => {
+          if (item.response) {
+            return item.response.data.url;
+          } else {
+            return item.url;
+          }
+        }),
       },
       channel_id: channel_id,
     };
     //调用接口提交数据
-    createArticleAPI(reqData);
+    //处理调用不同的接口
+    if (articleID) {
+      editArticleAPI({ ...reqData, id: articleID });
+    } else createArticleAPI(reqData);
   };
+
   //上传图片
   const [imageList, setImageList] = useState([]);
+
   const onUploadChange = (image) => {
     setImageList(image.fileList);
   };
@@ -59,7 +76,6 @@ export const Publish = () => {
   const [form] = Form.useForm();
   useEffect(() => {
     // Check if articleID is not null before making the API request
-
     async function getArticleDetail() {
       const res = await getArticleById(articleID);
       const data = res.data;
@@ -74,6 +90,7 @@ export const Publish = () => {
     }
     if (articleID) getArticleDetail();
   }, [articleID, form]);
+
   return (
     <div className="publish">
       <Card
