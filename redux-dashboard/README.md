@@ -2,8 +2,8 @@
 
 This Admin Dashboard is a web application built using React, Redux, and Axios. The visual design is crafted with SCSS and Ant Design components. The primary functionalities include user authentication, token-based user identification, article submission, viewing and filtering submitted articles, and article editing.
 
-# Overview
-
+## Overview
+![Screen-Recording-2024-01-30-at-1 (3)](https://github.com/YF91925352/Redux-Dashboard/assets/113684176/30cab6c4-068e-4f9e-8684-a035e8cf8b73)
 ## Technologies Used
 
 - [React](https://reactjs.org/)
