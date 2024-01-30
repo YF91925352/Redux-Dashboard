@@ -1,10 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import { AuthRoute } from "@/components/auth-route";
-import { HomeLayout, Login } from "@/pages";
-import { Suspense, lazy } from "react";
-const Home = lazy(() => import("@/pages/home"));
-const Article = lazy(() => import("@/pages/article"));
-const Publish = lazy(() => import("@/pages/publish"));
+import { Article, Home, HomeLayout, Login, Publish } from "@/pages";
+
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -16,27 +13,15 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: (
-          <Suspense fallback={"loading"}>
-            <Home />
-          </Suspense>
-        ),
+        element: <Home />,
       },
       {
         path: "/article",
-        element: (
-          <Suspense fallback={"loading"}>
-            <Article />
-          </Suspense>
-        ),
+        element: <Article />,
       },
       {
         path: "/publish",
-        element: (
-          <Suspense fallback={"loading"}>
-            <Publish />
-          </Suspense>
-        ),
+        element: <Publish />,
       },
     ],
   },

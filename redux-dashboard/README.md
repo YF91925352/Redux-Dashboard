@@ -1,70 +1,39 @@
 # Getting Started with Create React App
 
-1.利用 redux 对用户信息的 token 管理，从而识别用户身份信息保证登陆的正常运行 2.退出登陆删除 token 信息并返回登陆界面提高用户体验的交互性 3.处理 token 失效问题。当用户长时间未在网站中做任何操作，到达规定时间后 token 即失效 4.Homepage 插入三方 apache echarts 插件，按照业务需求可以修改配置进行定制处理 5.react quill 富文本编辑器发布新内容 6.5 分钟后新发布的内容 7.优化项目首次打开的时间，路由懒加载
+## Overview
 
-## Available Scripts
+This Admin Dashboard is a web application built using React, Redux, and Axios. The visual design is crafted with SCSS and Ant Design components. The primary functionalities include user authentication, token-based user identification, article submission, viewing and filtering submitted articles, and article editing.
 
-In the project directory, you can run:
+## Technologies Used
 
-### `npm start`
+### React: A JavaScript library for building user interfaces.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Redux: A state management library for handling the application's state.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Axios: A promise-based HTTP client for making requests to the server.
 
-### `npm test`
+### SCSS: A CSS preprocessor for styling the application with enhanced features.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Ant Design: A React UI library with a set of high-quality components.
 
-### `npm run build`
+## Key Features
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. User Authentication with Redux
+   Token Management: Utilizing Redux for efficient management of user information and tokens ensures proper identification of user identities, ensuring smooth login functionality.
+2. Seamless Logout Experience
+   Token Deletion: When a user logs out, the associated token information is promptly deleted, seamlessly redirecting the user to the login interface, enhancing the overall user experience.
+3. Handling Token Expiry
+   Token Expiry: To address token expiration due to prolonged inactivity, the system automatically invalidates tokens after a specified period of user inactivity.
+4. Enhanced Article Management
+   Article Submission: Users can submit new articles using the React Quill rich text editor, facilitating the creation of engaging and formatted content.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+5. Article Viewing and Editing
+   The dashboard allows users to filter and view submitted articles. Additionally, users can edit the content of existing articles, providing a comprehensive content management solution.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+6. Third-Party Apache Echarts Integration
+   Homepage Analytics: The homepage features integration with Apache Echarts, a third-party plugin. Configuration options are available for customizing the display of analytics data based on specific business requirements.
 
-### `npm run eject`
+## Getting Started
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Install dependencies: `npm install`
+Start the development server: `npm start`
