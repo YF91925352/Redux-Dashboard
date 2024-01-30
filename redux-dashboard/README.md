@@ -1,10 +1,10 @@
 # Getting Started with Create React App
 
-## Overview
+# Overview
 
 This Admin Dashboard is a web application built using React, Redux, and Axios. The visual design is crafted with SCSS and Ant Design components. The primary functionalities include user authentication, token-based user identification, article submission, viewing and filtering submitted articles, and article editing.
 
-## Technologies Used
+# Technologies Used
 
 ## React:
 
@@ -53,7 +53,7 @@ The dashboard allows users to filter and view submitted articles. Additionally, 
 Homepage Analytics:
 The homepage features integration with Apache Echarts, a third-party plugin. Configuration options are available for customizing the display of analytics data based on specific business requirements.
 
-## Getting Started
+# Getting Started
 
 Install dependencies: `npm install`
 Start the development server: `npm start`
