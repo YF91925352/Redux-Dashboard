@@ -4,6 +4,8 @@ This Admin Dashboard is a web application built using React, Redux, and Axios. T
 
 ## Overview
 ![Screen-Recording-2024-01-30-at-1 (3)](https://github.com/YF91925352/Redux-Dashboard/assets/113684176/30cab6c4-068e-4f9e-8684-a035e8cf8b73)
+![ScreenRecording2024-01-30at19 03 55-ezgif com-video-to-gif-converter](https://github.com/YF91925352/Redux-Dashboard/assets/113684176/e6051cad-4250-4f00-9cc2-cee8675e0e93)
+
 ## Technologies Used
 
 - [React](https://reactjs.org/)
